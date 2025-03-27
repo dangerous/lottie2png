@@ -1,0 +1,38 @@
+<!-- render.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      html, body, #lottie {
+        margin: 0;
+        padding: 0;
+        width: 512px;
+        height: 512px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="lottie"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js"></script>
+    <script>
+      window.renderLottie = (jsonData) => {
+        return new Promise((resolve) => {
+          const animation = lottie.loadAnimation({
+            container: document.getElementById("lottie"),
+            renderer: "canvas",
+            loop: false,
+            autoplay: false,
+            animationData: jsonData
+          });
+
+          animation.addEventListener("DOMLoaded", () => {
+            animation.goToAndStop(0, true); // First frame
+            setTimeout(resolve, 500); // Give it a moment to render
+          });
+        });
+      };
+    </script>
+  </body>
+</html>
