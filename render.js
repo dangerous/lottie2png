@@ -18,9 +18,13 @@ if (!inputFile) {
   await page.goto(htmlPath);
   await page.evaluate((data) => window.renderLottie(data), jsonData);
 
-  const canvas = await page.$('canvas');
+  const svgHandle = await page.$('svg');
+  if (!svgHandle) {
+    console.error('❌ No <svg> found on page');
+    process.exit(1);
+  }
   const outputFile = path.join(__dirname, 'output', path.basename(inputFile).replace('.json', '.png'));
-  await canvas.screenshot({ path: outputFile });
+  await svgHandle.screenshot({ path: outputFile });
 
   console.log('✅ Saved:', outputFile);
   await browser.close();
