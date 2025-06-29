@@ -1,6 +1,6 @@
 # Lottie Static Image Renderer (POC)
 
-This is a proof-of-concept tool to convert [Lottie](https://airbnb.io/lottie/#/) JSON animations into static PNG images using Node.js and Puppeteer.
+This is a proof-of-concept tool to convert [Lottie](https://airbnb.io/lottie/#/) JSON animations into static PNG images and SVG files using Node.js and Puppeteer.
 
 ---
 
@@ -25,7 +25,7 @@ This will install Puppeteer and download a headless version of Chromium.
 
 ---
 
-## 🖼️ Render a Lottie File to PNG
+## 🖼️ Render a Lottie File to PNG and SVG
 
 ### 1. Add Your Lottie JSON Files
 
@@ -37,7 +37,7 @@ Place your `.json` animation files inside the `lotties/` folder.
 node render.js lotties/your-animation.json
 ```
 
-A PNG file will be created in the `output/` folder with the same filename.
+PNG and SVG files will be created in the `output/` folder with the same filename.
 
 ---
 
@@ -58,6 +58,7 @@ Creates:
 
 ```
 output/open-doodles-reading-side.png
+output/open-doodles-reading-side.svg
 ```
 
 ---
@@ -67,7 +68,7 @@ output/open-doodles-reading-side.png
 ```
 lottie-poc/
 ├── lotties/            # Place your Lottie JSON files here
-├── output/             # PNGs will be saved here
+├── output/             # PNGs and SVGs will be saved here
 ├── node_modules/       # Installed dependencies (after `npm install`)
 ├── package.json        # Defines project metadata and dependencies
 ├── package-lock.json   # Locks exact versions for reproducible installs
