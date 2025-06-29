@@ -23,9 +23,17 @@ if (!inputFile) {
     console.error('❌ No <svg> found on page');
     process.exit(1);
   }
-  const outputFile = path.join(__dirname, 'output', path.basename(inputFile).replace('.json', '.png'));
-  await svgHandle.screenshot({ path: outputFile });
+  
+  const baseName = path.basename(inputFile).replace('.json', '');
+  const pngFile = path.join(__dirname, 'output', baseName + '.png');
+  const svgFile = path.join(__dirname, 'output', baseName + '.svg');
+  
+  await svgHandle.screenshot({ path: pngFile });
+  
+  const svgContent = await svgHandle.evaluate(el => el.outerHTML);
+  fs.writeFileSync(svgFile, svgContent);
 
-  console.log('✅ Saved:', outputFile);
+  console.log('✅ Saved PNG:', pngFile);
+  console.log('✅ Saved SVG:', svgFile);
   await browser.close();
 })();
